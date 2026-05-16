@@ -4,6 +4,7 @@ import NameInput from '../components/NameInput'
 import { saveRecord, saveName, getStats } from '../utils/storage'
 import PlaceModal from '../components/PlaceModal'
 import { getCurrentPosition, detectPlace } from '../utils/gps'
+import { syncToSheet } from '../utils/sheets'
 import './MainScreen.css'
 
 const SCORES = Array.from({ length: 30 }, (_, i) => i)
@@ -27,7 +28,7 @@ function formatDate(d) {
   return `${m}월 ${day}일 ${h}:${min}`
 }
 
-export default function MainScreen({ onHistory }) {
+export default function MainScreen({ onHistory, onSettings }) {
   const [mode, setMode] = useState('단식')
   const [winRule, setWinRule] = useState('2선승')
   const [leftNames, setLeftNames] = useState(['', ''])
@@ -93,6 +94,7 @@ export default function MainScreen({ onHistory }) {
       place,
     }
     saveRecord(record)
+    syncToSheet(record).catch(() => {})
     setSaved(true)
     setTimeout(() => {
       setSetResults({})
@@ -122,6 +124,7 @@ export default function MainScreen({ onHistory }) {
             ))}
           </div>
           <button className="history-btn" onClick={onHistory}>기록</button>
+          <button className="history-btn" onClick={onSettings}>설정</button>
         </div>
       </div>
 
