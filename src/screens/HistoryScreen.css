@@ -1,0 +1,73 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #1e1e2e;
+  color: #fff;
+}
+
+.history-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.history-title { font-size: 17px; font-weight: 500; }
+
+.back-btn {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 60px;
+}
+
+.history-list { padding: 8px 12px; display: flex; flex-direction: column; gap: 8px; }
+
+.game-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  border: 0.5px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px 8px;
+  gap: 6px;
+}
+
+.pname { flex: 1; font-size: 16px; font-weight: 500; }
+.pname-win { color: #4a9ef5; }
+.pname-lose { color: rgba(255,255,255,0.3); }
+.pname-right { text-align: right; }
+
+.set-score-center { display: flex; flex-direction: column; align-items: center; min-width: 56px; }
+.set-score-big { font-size: 22px; font-weight: 500; color: #fff; }
+.set-score-label { font-size: 10px; color: rgba(255,255,255,0.25); }
+
+.card-sets {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px 14px 10px;
+  border-top: 0.5px solid rgba(255,255,255,0.05);
+}
+
+.set-row { display: flex; align-items: center; justify-content: center; gap: 0; }
+.s-win { flex: 1; text-align: left; font-size: 13px; color: #4a9ef5; }
+.s-lose { flex: 1; text-align: right; font-size: 13px; color: rgba(255,255,255,0.25); }
+.s-div { font-size: 11px; color: rgba(255,255,255,0.2); padding: 0 8px; }
+
+.card-meta {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 14px 10px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+}

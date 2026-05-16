@@ -1,0 +1,255 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #1e1e2e;
+  color: #fff;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.right-top { display: flex; align-items: center; gap: 8px; }
+
+.seg {
+  display: flex;
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.seg-btn {
+  font-size: 13px;
+  padding: 5px 14px;
+  border-radius: 16px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.seg-btn.on { background: #185FA5; color: #fff; }
+
+.win-seg { display: flex; gap: 5px; }
+
+.win-btn {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 16px;
+  color: rgba(255,255,255,0.35);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  background: none;
+  cursor: pointer;
+}
+
+.win-btn.on { background: #185FA5; color: #fff; border-color: #185FA5; }
+
+.history-btn {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 16px;
+  color: rgba(255,255,255,0.5);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  background: none;
+  cursor: pointer;
+}
+
+.meta-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 6px;
+  justify-content: center;
+}
+
+.meta-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 6px 12px;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+}
+
+.names-section { padding: 8px 14px 6px; }
+
+.names-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.player-name {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 9px 10px;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.vs-small {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.record-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.rec {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  flex: 1;
+  text-align: center;
+}
+
+.rec-sep {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  padding: 0 8px;
+}
+
+.divider {
+  height: 0.5px;
+  background: rgba(255,255,255,0.07);
+  margin: 4px 14px;
+}
+
+.set-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 14px 5px;
+}
+
+.set-result {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 24px;
+  text-align: center;
+}
+
+.set-result.win { color: #4a9ef5; }
+.set-result.lose { color: #f56b6b; }
+.set-result.none { color: rgba(255,255,255,0.2); }
+
+.set-picker-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 4px 0;
+  width: 90px;
+  overflow: hidden;
+}
+
+.set-item {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  padding: 3px 0;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.set-item.active {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a9ef5;
+}
+
+.score-section { padding: 6px 10px 0; }
+
+.score-main-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.center-col {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.set-score-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  width: 38px;
+  padding: 10px 0;
+}
+
+.set-score-num {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+}
+
+.set-score-lbl {
+  font-size: 9px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 3px;
+}
+
+.set-save-btn {
+  margin: 8px 0 4px;
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  cursor: pointer;
+}
+
+.set-save-btn.active {
+  background: rgba(24,95,165,0.2);
+  border-color: rgba(24,95,165,0.5);
+  color: #4a9ef5;
+}
+
+.save-area { padding: 8px 14px 24px; margin-top: auto; }
+
+.save-btn {
+  width: 100%;
+  background: #185FA5;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+}
