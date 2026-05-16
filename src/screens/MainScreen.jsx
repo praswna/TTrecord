@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react'
 import ScrollPicker from '../components/ScrollPicker'
 import NameInput from '../components/NameInput'
 import { saveRecord, saveName, getStats } from '../utils/storage'
+import PlaceModal from '../components/PlaceModal'
+import { getCurrentPosition, detectPlace } from '../utils/gps'
 import './MainScreen.css'
 
 const SCORES = Array.from({ length: 30 }, (_, i) => i)
@@ -35,9 +37,18 @@ export default function MainScreen({ onHistory }) {
   const [rightScore, setRightScore] = useState(0)
   const [setResults, setSetResults] = useState({})
   const [gameDate] = useState(new Date())
-  const [place] = useState('OO탁구장')
+  const [place, setPlace] = useState('장소 미설정')
+  const [showPlaceModal, setShowPlaceModal] = useState(false)
+  
   const [stats, setStats] = useState({ leftWins: 0, rightWins: 0, total: 0 })
   const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    getCurrentPosition().then(pos => {
+      const found = detectPlace(pos.lat, pos.lon)
+      if (found) setPlace(found.name)
+    }).catch(() => {})
+  }, [])
 
   const SETS = winRule === '2선승' ? SETS_3 : SETS_5
   const setIndex = SETS.indexOf(currentSet)
@@ -116,7 +127,7 @@ export default function MainScreen({ onHistory }) {
 
       <div className="meta-row">
         <button className="meta-pill">⏱ {formatDate(gameDate)} ✏</button>
-        <button className="meta-pill">📍 {place} ✏</button>
+        <button className="meta-pill" onClick={() => setShowPlaceModal(true)}>📍 {place} ✏</button>
       </div>
 
       <div className="names-section">
@@ -185,6 +196,9 @@ export default function MainScreen({ onHistory }) {
           {saved ? '저장 완료! ✓' : '경기 저장'}
         </button>
       </div>
+      {showPlaceModal && (
+        <PlaceModal current={place} onSelect={setPlace} onClose={() => setShowPlaceModal(false)} />
+      )}
     </div>
   )
 }
