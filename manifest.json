@@ -1,0 +1,14 @@
+{
+  "name": "탁구기록 TTrecord",
+  "short_name": "탁구기록",
+  "description": "탁구 경기 결과 기록 앱",
+  "start_url": "/TTrecord/",
+  "display": "standalone",
+  "background_color": "#1e1e2e",
+  "theme_color": "#185FA5",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/TTrecord/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/TTrecord/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
