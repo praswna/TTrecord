@@ -169,18 +169,21 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="divider" />
 
-      <div className="set-picker-row">
-        <span className={`set-result ${getSetResult(currentSet)?.winner === 'left' ? 'win' : getSetResult(currentSet)?.winner === 'right' ? 'lose' : 'none'}`}>
-          {getSetResult(currentSet)?.winner === 'left' ? '승' : getSetResult(currentSet)?.winner === 'right' ? '패' : '-'}
-        </span>
-        <div className="set-picker-wrap">
-          {SETS.map(s => (
-            <div key={s} className={`set-item ${s === currentSet ? 'active' : ''}`} onClick={() => setCurrentSet(s)}>{s}</div>
-          ))}
-        </div>
-        <span className={`set-result ${getSetResult(currentSet)?.winner === 'right' ? 'win' : getSetResult(currentSet)?.winner === 'left' ? 'lose' : 'none'}`}>
-          {getSetResult(currentSet)?.winner === 'right' ? '승' : getSetResult(currentSet)?.winner === 'left' ? '패' : '-'}
-        </span>
+      <div className="set-picker-wrap-outer">
+        {SETS.map(s => {
+          const res = getSetResult(s)
+          return (
+            <div key={s} className={`set-row-item ${s === currentSet ? 'active' : ''}`} onClick={() => setCurrentSet(s)}>
+              <span className={`set-row-result ${res?.winner === 'left' ? 'win' : 'dim'}`}>
+                {res ? (res.winner === 'left' ? '승' : '패') : '-'}
+              </span>
+              <span className="set-row-label">{s}</span>
+              <span className={`set-row-result ${res?.winner === 'right' ? 'win' : 'dim'}`}>
+                {res ? (res.winner === 'right' ? '승' : '패') : '-'}
+              </span>
+            </div>
+          )
+        })}
       </div>
 
       <div className="divider" />

@@ -272,3 +272,47 @@
 
 .save-btn.saved { background: #1a7a3a; }
 .save-btn.disabled { background: rgba(24,95,165,0.35); cursor: not-allowed; }
+
+.set-picker-wrap-outer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 14px 4px;
+}
+
+.set-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 7px 14px;
+  cursor: pointer;
+  border: 0.5px solid transparent;
+  transition: background 0.1s;
+}
+
+.set-row-item.active {
+  background: rgba(24,95,165,0.15);
+  border-color: rgba(24,95,165,0.4);
+}
+
+.set-row-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+}
+
+.set-row-item.active .set-row-label {
+  color: #4a9ef5;
+}
+
+.set-row-result {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
+}
+
+.set-row-result.win { color: #4a9ef5; }
+.set-row-result.dim { color: rgba(255,255,255,0.2); }
