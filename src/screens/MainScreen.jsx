@@ -123,8 +123,8 @@ export default function MainScreen({ onHistory, onSettings }) {
               <button key={w} className={`win-btn ${winRule === w ? 'on' : ''}`} onClick={() => setWinRule(w)}>{w}</button>
             ))}
           </div>
-          <button className="history-btn" onClick={onHistory}>기록</button>
-          <button className="history-btn" onClick={onSettings}>설정</button>
+          <button className="icon-btn" onClick={onHistory} title="기록">📋</button>
+          <button className="icon-btn" onClick={onSettings} title="설정">⚙️</button>
         </div>
       </div>
 

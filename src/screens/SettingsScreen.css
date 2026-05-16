@@ -23,6 +23,7 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  min-width: 70px;
 }
 
 .settings-section { padding: 20px 16px; }
