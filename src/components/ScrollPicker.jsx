@@ -6,17 +6,19 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
   const isDragging = useRef(false)
   const startY = useRef(0)
   const startScrollTop = useRef(0)
+  const isScrollingProgrammatically = useRef(false)
 
   const currentIndex = items.indexOf(value)
 
   useEffect(() => {
-    if (listRef.current) {
-      listRef.current.scrollTop = currentIndex * itemHeight
-    }
-  }, [])
+    if (!listRef.current) return
+    isScrollingProgrammatically.current = true
+    listRef.current.scrollTo({ top: currentIndex * itemHeight, behavior: 'smooth' })
+    setTimeout(() => { isScrollingProgrammatically.current = false }, 300)
+  }, [value, currentIndex, itemHeight])
 
   const handleScroll = useCallback(() => {
-    if (!listRef.current) return
+    if (!listRef.current || isScrollingProgrammatically.current) return
     const idx = Math.round(listRef.current.scrollTop / itemHeight)
     const clamped = Math.max(0, Math.min(idx, items.length - 1))
     if (items[clamped] !== value) {
@@ -32,6 +34,7 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
 
   const handleTouchMove = (e) => {
     if (!isDragging.current) return
+    e.stopPropagation()
     const dy = startY.current - e.touches[0].clientY
     listRef.current.scrollTop = startScrollTop.current + dy
   }
@@ -56,7 +59,6 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        style={{ '--item-height': `${itemHeight}px` }}
       >
         <div className="scroll-picker__padding" style={{ height: itemHeight }} />
         {items.map((item, i) => (
