@@ -10,9 +10,24 @@
     <link rel="manifest" href="/TTrecord/manifest.json" />
     <link rel="apple-touch-icon" href="/TTrecord/icon-192.png" />
     <title>탁구기록 TTrecord</title>
-    <script type="module" crossorigin src="/TTrecord/assets/index-BQuo7YJE.js"></script>
-    <link rel="stylesheet" crossorigin href="/TTrecord/assets/index-DpW47Y45.css">
-  </head>
+    <style>
+    html, body {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+      touch-action: none;
+    }
+    #root {
+      overflow-y: auto;
+      height: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+  <script type="module" crossorigin src="/TTrecord/assets/index-Cr44wFiP.js"></script>
+  <link rel="stylesheet" crossorigin href="/TTrecord/assets/index-plUezFtq.css">
+</head>
   <body>
     <div id="root"></div>
   </body>
