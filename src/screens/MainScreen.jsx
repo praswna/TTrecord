@@ -7,7 +7,18 @@ import { getCurrentPosition, detectPlace } from '../utils/gps'
 import { syncToSheet } from '../utils/sheets'
 import './MainScreen.css'
 
-const SCORES = Array.from({ length: 30 }, (_, i) => i)
+const ALL_SCORES = Array.from({ length: 31 }, (_, i) => i)
+
+function getValidScores(otherScore) {
+  return ALL_SCORES.filter(s => {
+    const max = Math.max(s, otherScore)
+    const min = Math.min(s, otherScore)
+    if (s === otherScore) return true
+    if (max < 11) return true
+    if (max === 11) return min <= 9
+    return max - min <= 2
+  })
+}
 const SETS_3 = ['1세트', '2세트', '3세트']
 const SETS_5 = ['1세트', '2세트', '3세트', '4세트', '5세트']
 
@@ -176,7 +187,7 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="score-section">
         <div className="score-main-row">
-          <ScrollPicker items={SCORES} value={leftScore} onChange={setLeftScore} />
+          <ScrollPicker items={getValidScores(rightScore)} value={leftScore} onChange={v => { setLeftScore(v) }} />
           <div className="center-col">
             <div className="set-score-block">
               <div className="set-score-num">{leftSetWins}</div>
@@ -187,7 +198,7 @@ export default function MainScreen({ onHistory, onSettings }) {
               <div className="set-score-lbl">세트</div>
             </div>
           </div>
-          <ScrollPicker items={SCORES} value={rightScore} onChange={setRightScore} />
+          <ScrollPicker items={getValidScores(leftScore)} value={rightScore} onChange={v => { setRightScore(v) }} />
         </div>
         <button className={`set-save-btn ${valid ? 'active' : ''}`} onClick={handleSaveSet} disabled={!valid}>
           세트 저장 {valid ? `(${leftScore} : ${rightScore})` : ''}
