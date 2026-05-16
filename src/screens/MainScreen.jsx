@@ -43,7 +43,7 @@ function formatDate(d) {
 
 export default function MainScreen({ onHistory, onSettings }) {
   const [mode, setMode] = useState('단식')
-  const [winRule, setWinRule] = useState('2선승')
+  const [winRule, setWinRule] = useState('3선승')
   const [leftNames, setLeftNames] = useState(['', ''])
   const [rightNames, setRightNames] = useState(['', ''])
   const [currentSet, setCurrentSet] = useState('1세트')
