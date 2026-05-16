@@ -175,8 +175,8 @@ export default function MainScreen({ onHistory, onSettings }) {
             const res = getSetResult(s)
             return (
               <div key={s} className={`set-side-item ${s === currentSet ? 'active' : ''}`}>
-                <span className={`set-side-result ${res?.winner === 'left' ? 'win' : res ? 'lose' : 'dim'}`}>
-                  {res ? (res.winner === 'left' ? '승' : '패') : ''}
+                <span className={`set-side-result ${res?.winner === 'left' ? 'win' : res ? 'lose' : 'preview'}`}>
+                  승
                 </span>
               </div>
             )
@@ -194,8 +194,8 @@ export default function MainScreen({ onHistory, onSettings }) {
             const res = getSetResult(s)
             return (
               <div key={s} className={`set-side-item ${s === currentSet ? 'active' : ''}`}>
-                <span className={`set-side-result ${res?.winner === 'right' ? 'win' : res ? 'lose' : 'dim'}`}>
-                  {res ? (res.winner === 'right' ? '승' : '패') : ''}
+                <span className={`set-side-result ${res?.winner === 'right' ? 'win' : res ? 'lose' : 'preview'}`}>
+                  패
                 </span>
               </div>
             )

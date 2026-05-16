@@ -357,3 +357,4 @@
 .set-side-result.win { color: #4a9ef5; }
 .set-side-result.lose { color: #f56b6b; }
 .set-side-result.dim { color: rgba(255,255,255,0.2); }
+.set-side-result.preview { color: rgba(255,255,255,0.15); }
