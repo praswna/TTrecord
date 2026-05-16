@@ -20,6 +20,17 @@ function isValidScore(a, b) {
   return max - min >= 2
 }
 
+function getInvalidReason(a, b) {
+  if (a === 0 && b === 0) return '점수를 입력하세요'
+  if (a === b) return '동점은 저장할 수 없어요'
+  const max = Math.max(a, b)
+  const min = Math.min(a, b)
+  if (max < 11) return `${max}점 이상이어야 해요`
+  if (max === 11 && min >= 10) return '11:10은 유효하지 않아요'
+  if (max > 11 && max - min < 2) return '2점 차이 이상이어야 해요'
+  return ''
+}
+
 function formatDate(d) {
   const m = d.getMonth() + 1
   const day = d.getDate()
@@ -210,7 +221,7 @@ export default function MainScreen({ onHistory, onSettings }) {
           <ScrollPicker items={SCORES} value={rightScore} onChange={setRightScore} />
         </div>
         <button className={`set-save-btn ${valid ? 'active' : ''}`} onClick={handleSaveSet} disabled={!valid}>
-          세트 저장 {valid ? `(${leftScore} : ${rightScore})` : ''}
+          {valid ? `세트 저장 (${leftScore} : ${rightScore})` : '세트 저장 : ' + getInvalidReason(leftScore, rightScore)}
         </button>
       </div>
 
