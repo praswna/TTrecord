@@ -5,27 +5,37 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
   const listRef = useRef(null)
   const isProgrammatic = useRef(false)
   const touchStartY = useRef(0)
-  const touchStartTime = useRef(0)
   const lastTouchY = useRef(0)
   const lastTouchTime = useRef(0)
   const velocityY = useRef(0)
   const rafId = useRef(null)
+  const prevValue = useRef(value)
+  const initialized = useRef(false)
 
   const currentIndex = items.indexOf(value)
 
   useEffect(() => {
     if (!listRef.current) return
-    isProgrammatic.current = true
-    listRef.current.scrollTo({ top: currentIndex * itemHeight, behavior: 'smooth' })
-    setTimeout(() => { isProgrammatic.current = false }, 400)
+    if (!initialized.current) {
+      listRef.current.scrollTop = currentIndex * itemHeight
+      initialized.current = true
+      return
+    }
+    if (prevValue.current !== value) {
+      prevValue.current = value
+      isProgrammatic.current = true
+      listRef.current.scrollTo({ top: currentIndex * itemHeight, behavior: 'smooth' })
+      setTimeout(() => { isProgrammatic.current = false }, 400)
+    }
   }, [value, currentIndex, itemHeight])
 
   const snapToNearest = useCallback(() => {
     if (!listRef.current) return
     const idx = Math.round(listRef.current.scrollTop / itemHeight)
     const clamped = Math.max(0, Math.min(idx, items.length - 1))
-    listRef.current.scrollTo({ top: clamped * itemHeight, behavior: 'smooth' })
     isProgrammatic.current = true
+    listRef.current.scrollTo({ top: clamped * itemHeight, behavior: 'smooth' })
+    prevValue.current = items[clamped]
     onChange(items[clamped])
     setTimeout(() => { isProgrammatic.current = false }, 400)
   }, [items, onChange, itemHeight])
@@ -52,7 +62,6 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
     isProgrammatic.current = false
     const y = e.touches[0].clientY
     touchStartY.current = y
-    touchStartTime.current = Date.now()
     lastTouchY.current = y
     lastTouchTime.current = Date.now()
     velocityY.current = 0
@@ -79,7 +88,10 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
     if (isProgrammatic.current) return
     const idx = Math.round(listRef.current.scrollTop / itemHeight)
     const clamped = Math.max(0, Math.min(idx, items.length - 1))
-    if (items[clamped] !== value) onChange(items[clamped])
+    if (items[clamped] !== value) {
+      prevValue.current = items[clamped]
+      onChange(items[clamped])
+    }
   }, [items, value, onChange, itemHeight])
 
   return (
@@ -103,8 +115,11 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
             style={{ height: itemHeight }}
             onClick={() => {
               if (rafId.current) cancelAnimationFrame(rafId.current)
+              isProgrammatic.current = true
               listRef.current.scrollTo({ top: i * itemHeight, behavior: 'smooth' })
+              prevValue.current = item
               onChange(item)
+              setTimeout(() => { isProgrammatic.current = false }, 400)
             }}
           >
             {item}
