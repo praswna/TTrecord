@@ -1,17 +1,27 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  background: #111122;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
+html, body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#root {
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .app {
   width: 100%;
   max-width: 430px;
-  min-height: 100vh;
+  min-height: 100%;
   background: #1e1e2e;
+  margin: 0 auto;
 }

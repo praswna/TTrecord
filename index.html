@@ -10,7 +10,22 @@
     <link rel="manifest" href="/TTrecord/manifest.json" />
     <link rel="apple-touch-icon" href="/TTrecord/icon-192.png" />
     <title>탁구기록 TTrecord</title>
-  </head>
+    <style>
+    html, body {
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+      touch-action: none;
+    }
+    #root {
+      overflow-y: auto;
+      height: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
