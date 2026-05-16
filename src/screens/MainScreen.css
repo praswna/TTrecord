@@ -186,15 +186,17 @@
 .set-item {
   font-size: 11px;
   color: rgba(255,255,255,0.2);
-  padding: 3px 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   width: 100%;
   cursor: pointer;
-  line-height: 1.6;
 }
 
 .set-item.active {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #4a9ef5;
 }
@@ -316,3 +318,42 @@
 
 .set-row-result.win { color: #4a9ef5; }
 .set-row-result.dim { color: rgba(255,255,255,0.2); }
+
+.set-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 14px;
+}
+
+.set-side-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.set-side-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+}
+
+.set-side-result {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
+  opacity: 0.3;
+  transition: opacity 0.1s, font-size 0.1s;
+}
+
+.set-side-item.active .set-side-result {
+  font-size: 15px;
+  opacity: 1;
+}
+
+.set-side-result.win { color: #4a9ef5; }
+.set-side-result.lose { color: #f56b6b; }
+.set-side-result.dim { color: rgba(255,255,255,0.2); }

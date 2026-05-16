@@ -169,21 +169,38 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="divider" />
 
-      <div className="set-picker-wrap-outer">
-        {SETS.map(s => {
-          const res = getSetResult(s)
-          return (
-            <div key={s} className={`set-row-item ${s === currentSet ? 'active' : ''}`} onClick={() => setCurrentSet(s)}>
-              <span className={`set-row-result ${res?.winner === 'left' ? 'win' : 'dim'}`}>
-                {res ? (res.winner === 'left' ? '승' : '패') : '-'}
-              </span>
-              <span className="set-row-label">{s}</span>
-              <span className={`set-row-result ${res?.winner === 'right' ? 'win' : 'dim'}`}>
-                {res ? (res.winner === 'right' ? '승' : '패') : '-'}
-              </span>
-            </div>
-          )
-        })}
+      <div className="set-picker-row">
+        <div className="set-side-results">
+          {SETS.map(s => {
+            const res = getSetResult(s)
+            return (
+              <div key={s} className={`set-side-item ${s === currentSet ? 'active' : ''}`}>
+                <span className={`set-side-result ${res?.winner === 'left' ? 'win' : res ? 'lose' : 'dim'}`}>
+                  {res ? (res.winner === 'left' ? '승' : '패') : ''}
+                </span>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="set-picker-wrap">
+          {SETS.map(s => (
+            <div key={s} className={`set-item ${s === currentSet ? 'active' : ''}`} onClick={() => setCurrentSet(s)}>{s}</div>
+          ))}
+        </div>
+
+        <div className="set-side-results">
+          {SETS.map(s => {
+            const res = getSetResult(s)
+            return (
+              <div key={s} className={`set-side-item ${s === currentSet ? 'active' : ''}`}>
+                <span className={`set-side-result ${res?.winner === 'right' ? 'win' : res ? 'lose' : 'dim'}`}>
+                  {res ? (res.winner === 'right' ? '승' : '패') : ''}
+                </span>
+              </div>
+            )
+          })}
+        </div>
       </div>
 
       <div className="divider" />
