@@ -33,7 +33,7 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
   const applyInertia = useCallback((velocity) => {
     if (!listRef.current) return
     let v = velocity
-    const friction = 0.92
+    const friction = 0.88
 
     const step = () => {
       if (Math.abs(v) < 0.5) {
@@ -64,7 +64,7 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
     const now = Date.now()
     const dt = now - lastTouchTime.current
     if (dt > 0) {
-      velocityY.current = (lastTouchY.current - y) / dt * 16
+      velocityY.current = (lastTouchY.current - y) / dt * 28
     }
     listRef.current.scrollTop += lastTouchY.current - y
     lastTouchY.current = y
