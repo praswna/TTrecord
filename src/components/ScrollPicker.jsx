@@ -57,19 +57,35 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
     rafId.current = requestAnimationFrame(step)
   }, [snapToNearest])
 
+  const isVertical = useRef(null)
+  const touchStartX = useRef(0)
+
   const handleTouchStart = (e) => {
     if (rafId.current) cancelAnimationFrame(rafId.current)
     isProgrammatic.current = false
-    const y = e.touches[0].clientY
-    touchStartY.current = y
-    lastTouchY.current = y
+    isVertical.current = null
+    const touch = e.touches[0]
+    touchStartY.current = touch.clientY
+    touchStartX.current = touch.clientX
+    lastTouchY.current = touch.clientY
     lastTouchTime.current = Date.now()
     velocityY.current = 0
   }
 
   const handleTouchMove = (e) => {
+    const touch = e.touches[0]
+    const dy = touch.clientY - touchStartY.current
+    const dx = touch.clientX - touchStartX.current
+
+    if (isVertical.current === null) {
+      if (Math.abs(dy) < 4 && Math.abs(dx) < 4) return
+      isVertical.current = Math.abs(dy) > Math.abs(dx)
+    }
+
+    if (!isVertical.current) return
+
     e.stopPropagation()
-    const y = e.touches[0].clientY
+    const y = touch.clientY
     const now = Date.now()
     const dt = now - lastTouchTime.current
     if (dt > 0) {
@@ -81,6 +97,7 @@ export default function ScrollPicker({ items, value, onChange, itemHeight = 44 }
   }
 
   const handleTouchEnd = () => {
+    if (isVertical.current === false) return
     applyInertia(velocityY.current)
   }
 
