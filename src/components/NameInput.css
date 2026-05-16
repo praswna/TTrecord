@@ -1,0 +1,40 @@
+.name-input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.name-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #2a2a3e;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  z-index: 100;
+  overflow: hidden;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.name-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+}
+
+.name-item:last-child { border-bottom: none; }
+.name-item:hover { background: rgba(255,255,255,0.06); }
+
+.name-delete {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+}

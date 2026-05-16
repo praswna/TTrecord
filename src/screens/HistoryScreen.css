@@ -22,8 +22,29 @@
   background: none;
   border: none;
   cursor: pointer;
-  width: 60px;
+  white-space: nowrap;
 }
+
+.place-filter {
+  display: flex;
+  gap: 7px;
+  padding: 10px 14px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+  overflow-x: auto;
+}
+
+.place-chip {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+  background: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.place-chip.on { background: #185FA5; color: #fff; border-color: #185FA5; }
 
 .history-list { padding: 8px 12px; display: flex; flex-direction: column; gap: 8px; }
 
@@ -41,33 +62,64 @@
   gap: 6px;
 }
 
-.pname { flex: 1; font-size: 16px; font-weight: 500; }
-.pname-win { color: #4a9ef5; }
-.pname-lose { color: rgba(255,255,255,0.3); }
-.pname-right { text-align: right; }
+.pname-col { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.pname-col.right { align-items: flex-end; }
+.pname-col.won .pname { color: #4a9ef5; }
+.pname-col.lost .pname { color: rgba(255,255,255,0.3); }
+.pname { font-size: 15px; font-weight: 500; }
 
-.set-score-center { display: flex; flex-direction: column; align-items: center; min-width: 56px; }
+.set-score-center { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
 .set-score-big { font-size: 22px; font-weight: 500; color: #fff; }
 .set-score-label { font-size: 10px; color: rgba(255,255,255,0.25); }
 
 .card-sets {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding: 4px 14px 10px;
+  gap: 2px;
+  padding: 4px 14px 8px;
   border-top: 0.5px solid rgba(255,255,255,0.05);
 }
 
-.set-row { display: flex; align-items: center; justify-content: center; gap: 0; }
+.set-row { display: flex; align-items: center; }
 .s-win { flex: 1; text-align: left; font-size: 13px; color: #4a9ef5; }
 .s-lose { flex: 1; text-align: right; font-size: 13px; color: rgba(255,255,255,0.25); }
 .s-div { font-size: 11px; color: rgba(255,255,255,0.2); padding: 0 8px; }
 
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 14px 10px;
+}
+
 .card-meta {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 14px 10px;
+  gap: 8px;
   font-size: 10px;
   color: rgba(255,255,255,0.25);
+  flex-wrap: wrap;
 }
+
+.delete-btn {
+  font-size: 11px;
+  color: rgba(255,80,80,0.5);
+  background: none;
+  border: 0.5px solid rgba(255,80,80,0.2);
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 80px 20px;
+  gap: 12px;
+}
+
+.empty-icon { font-size: 48px; }
+.empty-text { font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.empty-sub { font-size: 13px; color: rgba(255,255,255,0.3); }

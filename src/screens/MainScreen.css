@@ -253,3 +253,23 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.names-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.vs-small {
+  padding-top: 12px;
+}
+
+.save-btn.saved {
+  background: #1a7a3a;
+}
+
+.save-btn.disabled {
+  background: rgba(24,95,165,0.4);
+  cursor: not-allowed;
+}
