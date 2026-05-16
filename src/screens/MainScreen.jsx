@@ -17,18 +17,20 @@ function isValidScore(a, b) {
   const min = Math.min(a, b)
   if (max < 11) return false
   if (max === 11) return min <= 9
-  return max - min >= 2
+  if (min < 10) return false
+  return max - min === 2
 }
 
 function getInvalidReason(a, b) {
   if (a === 0 && b === 0) return '점수를 입력하세요'
-  if (a === b) return '동점은 저장할 수 없어요'
+  if (a === b) return '동점은 저장 불가'
   const max = Math.max(a, b)
   const min = Math.min(a, b)
-  if (max < 11) return `${max}점 이상이어야 해요`
-  if (max === 11 && min >= 10) return '11:10은 유효하지 않아요'
-  if (max > 11 && max - min < 2) return '2점 차이 이상이어야 해요'
-  return ''
+  if (max < 11) return max + '점 → 11점 이상 필요'
+  if (max === 11 && min >= 10) return '11:10은 유효하지 않음'
+  if (max > 11 && min < 10) return '듀스는 10:10 이후부터'
+  if (max > 11 && max - min !== 2) return '2점 차이로 끝나야 해요'
+  return '유효하지 않은 점수'
 }
 
 function formatDate(d) {
