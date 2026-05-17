@@ -234,6 +234,33 @@ export default function MainScreen({ onHistory, onSettings }) {
         </button>
       </div>
 
+      <div className="game-result-area">
+        {gameOver && !saved && (
+          <div className="game-result-banner">
+            <div className={`game-result-text ${leftSetWins > rightSetWins ? 'left-win' : 'right-win'}`}>
+              <span className="result-left">{leftSetWins > rightSetWins ? '승' : '패'}</span>
+              <span className="result-score">{leftSetWins} : {rightSetWins}</span>
+              <span className="result-right">{rightSetWins > leftSetWins ? '승' : '패'}</span>
+            </div>
+            <div className="result-names">
+              <span>{activeLeft.join(' / ')}</span>
+              <span>{activeRight.join(' / ')}</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="game-result-area">
+        {gameOver && !saved && (
+          <div className="game-result-banner">
+            <div className="game-result-text">
+              <span className={`result-name ${leftSetWins > rightSetWins ? 'win' : 'lose'}`}>{leftSetWins > rightSetWins ? '승' : '패'}</span>
+              <span className="result-score">{leftSetWins} : {rightSetWins}</span>
+              <span className={`result-name ${rightSetWins > leftSetWins ? 'win' : 'lose'}`}>{rightSetWins > leftSetWins ? '승' : '패'}</span>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="save-area">
         <button className={`save-btn ${saved ? 'saved' : ''} ${!canSaveGame ? 'disabled' : ''}`} onClick={handleSaveGame} disabled={!canSaveGame}>
           {saved ? '저장 완료! ✓' : canSaveGame ? '경기 저장' : '경기 저장 : ' + getGameSaveReason()}
