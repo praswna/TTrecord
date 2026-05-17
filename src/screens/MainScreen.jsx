@@ -144,9 +144,9 @@ export default function MainScreen({ onHistory, onSettings }) {
           ))}
         </div>
         <div className="right-top">
-          <div className="win-seg">
+          <div className="seg">
             {['2선승', '3선승'].map(w => (
-              <button key={w} className={`win-btn ${winRule === w ? 'on' : ''}`} onClick={() => setWinRule(w)}>{w}</button>
+              <button key={w} className={`seg-btn ${winRule === w ? 'on' : ''}`} onClick={() => setWinRule(w)}>{w}</button>
             ))}
           </div>
           <button className="icon-btn" onClick={onHistory} title="기록">📋</button>
