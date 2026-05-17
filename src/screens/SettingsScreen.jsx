@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getSheetUrl, setSheetUrl } from '../utils/sheets'
+const VERSION = '0.1.0'
 import './SettingsScreen.css'
 
 export default function SettingsScreen({ onBack }) {
@@ -56,6 +57,7 @@ export default function SettingsScreen({ onBack }) {
           </div>
         )}
       </div>
+      <div className="version-info">v{VERSION}</div>
     </div>
   )
 }
