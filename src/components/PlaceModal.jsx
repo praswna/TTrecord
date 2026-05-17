@@ -1,50 +1,40 @@
 import { useState, useEffect } from 'react'
-import { getPlaces, savePlace, deletePlace, getCurrentPosition, detectPlace } from '../utils/gps'
 import './PlaceModal.css'
+
+const PLACES_KEY = 'ttrecord_places'
+
+function getPlaces() {
+  try { return JSON.parse(localStorage.getItem(PLACES_KEY) || '[]') } catch { return [] }
+}
+function savePlaces(places) {
+  localStorage.setItem(PLACES_KEY, JSON.stringify(places))
+}
 
 export default function PlaceModal({ current, onSelect, onClose }) {
   const [places, setPlaces] = useState([])
   const [newName, setNewName] = useState('')
-  const [gpsStatus, setGpsStatus] = useState('idle')
-  const [radius, setRadius] = useState(100)
-  const [currentPos, setCurrentPos] = useState(null)
-  const [detected, setDetected] = useState(null)
 
   useEffect(() => {
     setPlaces(getPlaces())
-    tryDetect()
   }, [])
 
-  const tryDetect = async () => {
-    try {
-      const pos = await getCurrentPosition()
-      setCurrentPos(pos)
-      const found = detectPlace(pos.lat, pos.lon)
-      if (found) setDetected(found)
-    } catch {}
-  }
-
-  const handleRegister = async () => {
+  const handleAdd = () => {
     if (!newName.trim()) return
-    setGpsStatus('loading')
-    try {
-      const pos = currentPos || await getCurrentPosition()
-      setCurrentPos(pos)
-      const place = { name: newName.trim(), lat: pos.lat, lon: pos.lon, radius }
-      savePlace(place)
-      setPlaces(getPlaces())
-      setNewName('')
-      setGpsStatus('done')
-      setTimeout(() => setGpsStatus('idle'), 1500)
-    } catch {
-      setGpsStatus('error')
-      setTimeout(() => setGpsStatus('idle'), 2000)
-    }
+    const updated = [newName.trim(), ...places.filter(p => p !== newName.trim())]
+    savePlaces(updated)
+    setPlaces(updated)
+    setNewName('')
   }
 
   const handleDelete = (name) => {
-    deletePlace(name)
-    setPlaces(getPlaces())
+    const updated = places.filter(p => p !== name)
+    savePlaces(updated)
+    setPlaces(updated)
+  }
+
+  const handleSelect = (name) => {
+    onSelect(name)
+    onClose()
   }
 
   return (
@@ -55,50 +45,26 @@ export default function PlaceModal({ current, onSelect, onClose }) {
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
 
-        {detected && (
-          <div className="detected-place" onClick={() => { onSelect(detected.name); onClose() }}>
-            <span className="detected-icon">📍</span>
-            <span className="detected-name">{detected.name}</span>
-            <span className="detected-label">현재 위치</span>
-          </div>
-        )}
-
         <div className="place-list">
+          {places.length === 0 && <div className="place-empty">저장된 장소가 없어요</div>}
           {places.map(p => (
-            <div key={p.name} className={`place-item ${p.name === current ? 'active' : ''}`}>
-              <span onClick={() => { onSelect(p.name); onClose() }}>{p.name}</span>
-              <div className="place-item-right">
-                <span className="place-radius">{p.radius || 100}m</span>
-                <button className="place-delete" onClick={() => handleDelete(p.name)}>✕</button>
-              </div>
+            <div key={p} className={`place-item ${p === current ? 'active' : ''}`}>
+              <span onClick={() => handleSelect(p)}>{p}</span>
+              <button className="place-delete" onClick={() => handleDelete(p)}>✕</button>
             </div>
           ))}
-          {places.length === 0 && <div className="place-empty">등록된 장소가 없어요</div>}
         </div>
 
         <div className="place-register">
-          <div className="register-title">새 장소 등록</div>
+          <div className="register-title">새 장소 추가</div>
           <input
             className="place-input"
             placeholder="장소 이름 (예: OO탁구장)"
             value={newName}
             onChange={e => setNewName(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleAdd()}
           />
-          <div className="radius-row">
-            <span className="radius-label">인식 반경</span>
-            <input type="range" min="50" max="500" step="50" value={radius} onChange={e => setRadius(Number(e.target.value))} />
-            <span className="radius-val">{radius}m</span>
-          </div>
-          <button
-            className={`register-btn ${gpsStatus}`}
-            onClick={handleRegister}
-            disabled={gpsStatus === 'loading'}
-          >
-            {gpsStatus === 'loading' ? 'GPS 위치 확인 중...' :
-             gpsStatus === 'done' ? '등록 완료! ✓' :
-             gpsStatus === 'error' ? 'GPS 오류 - 다시 시도' :
-             '현재 위치로 등록'}
-          </button>
+          <button className="register-btn" onClick={handleAdd}>추가</button>
         </div>
       </div>
     </div>

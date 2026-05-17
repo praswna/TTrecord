@@ -4,7 +4,6 @@ import NameInput from '../components/NameInput'
 import { saveRecord, saveName, getStats } from '../utils/storage'
 import PlaceModal from '../components/PlaceModal'
 import DateModal from '../components/DateModal'
-import { getCurrentPosition, detectPlace } from '../utils/gps'
 import { syncToSheet } from '../utils/sheets'
 import './MainScreen.css'
 
@@ -58,13 +57,6 @@ export default function MainScreen({ onHistory, onSettings }) {
   
   const [stats, setStats] = useState({ leftWins: 0, rightWins: 0, total: 0 })
   const [saved, setSaved] = useState(false)
-
-  useEffect(() => {
-    getCurrentPosition().then(pos => {
-      const found = detectPlace(pos.lat, pos.lon)
-      if (found) setPlace(found.name)
-    }).catch(() => {})
-  }, [])
 
   const SETS = winRule === '2선승' ? SETS_3 : SETS_5
   const setIndex = SETS.indexOf(currentSet)
