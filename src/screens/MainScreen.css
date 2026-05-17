@@ -362,3 +362,9 @@
 .set-save-row {
   padding: 0 10px 4px;
 }
+
+.history-mid-btn {
+  background: rgba(24,95,165,0.2);
+  border-color: rgba(24,95,165,0.4);
+  color: #4a9ef5;
+}
