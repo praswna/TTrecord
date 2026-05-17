@@ -121,7 +121,18 @@ export default function MainScreen({ onHistory, onSettings }) {
   }, [mode, winRule, activeLeft, activeRight, setResults, leftSetWins, rightSetWins, gameDate, place])
 
   const valid = isValidScore(leftScore, rightScore)
-  const canSaveGame = Object.keys(setResults).length > 0
+  const requiredWins = winRule === '2선승' ? 2 : 3
+  const gameOver = leftSetWins >= requiredWins || rightSetWins >= requiredWins
+  const canSaveGame = gameOver
+
+  const getGameSaveReason = () => {
+    if (!activeLeft.length || !activeRight.length) return '선수 이름을 입력하세요'
+    const maxWins = Math.max(leftSetWins, rightSetWins)
+    const needed = requiredWins - maxWins
+    if (needed > 0) return `${needed}세트 더 필요해요`
+    return ''
+  }
+
   const getSetResult = (setKey) => setResults[setKey]
 
   return (
@@ -231,7 +242,7 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="save-area">
         <button className={`save-btn ${saved ? 'saved' : ''} ${!canSaveGame ? 'disabled' : ''}`} onClick={handleSaveGame} disabled={!canSaveGame}>
-          {saved ? '저장 완료! ✓' : '경기 저장'}
+          {saved ? '저장 완료! ✓' : canSaveGame ? '경기 저장' : '경기 저장 : ' + getGameSaveReason()}
         </button>
       </div>
       {showDateModal && (
