@@ -186,7 +186,7 @@
 .set-item {
   font-size: 11px;
   color: rgba(255,255,255,0.2);
-  height: 36px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -337,7 +337,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px;
+  height: 24px;
 }
 
 .set-side-result {
