@@ -345,8 +345,7 @@
   font-weight: 500;
   min-width: 20px;
   text-align: center;
-  opacity: 0.3;
-  transition: opacity 0.1s, font-size 0.1s;
+  transition: font-size 0.1s;
 }
 
 .set-side-item.active .set-side-result {
@@ -354,10 +353,14 @@
   opacity: 1;
 }
 
+.set-side-result {
+  opacity: 1 !important;
+}
+
 .set-side-result.win { color: #4a9ef5; }
 .set-side-result.lose { color: #f56b6b; }
 .set-side-result.dim { color: rgba(255,255,255,0.2); }
-.set-side-result.preview { color: rgba(255,255,255,0.15); }
+.set-side-result.preview { color: rgba(255,255,255,0.35); }
 
 .set-save-row {
   padding: 0 10px 4px;
