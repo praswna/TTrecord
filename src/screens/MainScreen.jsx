@@ -195,6 +195,11 @@ export default function MainScreen({ onHistory, onSettings }) {
       <div className="divider" />
 
       <div className="set-picker-row">
+        {gameOver && (
+          <div className={`big-result-left ${leftSetWins > rightSetWins ? 'win' : 'lose'}`}>
+            {leftSetWins > rightSetWins ? '승' : '패'}
+          </div>
+        )}
         <div className="set-side-results">
           {SETS.map(s => {
             const res = getSetResult(s)
@@ -226,6 +231,11 @@ export default function MainScreen({ onHistory, onSettings }) {
             )
           })}
         </div>
+        {gameOver && (
+          <div className={`big-result-right ${rightSetWins > leftSetWins ? 'win' : 'lose'}`}>
+            {rightSetWins > leftSetWins ? '승' : '패'}
+          </div>
+        )}
       </div>
 
       <div className="set-save-row">
@@ -250,17 +260,6 @@ export default function MainScreen({ onHistory, onSettings }) {
         )}
       </div>
 
-      <div className="game-result-area">
-        {gameOver && !saved && (
-          <div className="game-result-banner">
-            <div className="game-result-text">
-              <span className={`result-name ${leftSetWins > rightSetWins ? 'win' : 'lose'}`}>{leftSetWins > rightSetWins ? '승' : '패'}</span>
-              <span className="result-score">{leftSetWins} : {rightSetWins}</span>
-              <span className={`result-name ${rightSetWins > leftSetWins ? 'win' : 'lose'}`}>{rightSetWins > leftSetWins ? '승' : '패'}</span>
-            </div>
-          </div>
-        )}
-      </div>
       <div className="save-area">
         <button className={`save-btn ${saved ? 'saved' : ''} ${!canSaveGame ? 'disabled' : ''}`} onClick={handleSaveGame} disabled={!canSaveGame}>
           {saved ? '저장 완료! ✓' : canSaveGame ? '경기 저장' : '경기 저장 : ' + getGameSaveReason()}

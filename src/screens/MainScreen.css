@@ -407,3 +407,21 @@
   font-weight: 500;
   color: rgba(255,255,255,0.4);
 }
+
+.big-result-left, .big-result-right {
+  flex: 1;
+  font-size: 60px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-result-left.win, .big-result-right.win { color: #4a9ef5; }
+.big-result-left.lose, .big-result-right.lose { color: rgba(255,255,255,0.2); }
+
+.set-picker-row {
+  position: relative;
+}
