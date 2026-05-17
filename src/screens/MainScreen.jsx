@@ -7,7 +7,14 @@ import DateModal from '../components/DateModal'
 import { syncToSheet } from '../utils/sheets'
 import './MainScreen.css'
 
-const SCORES = Array.from({ length: 31 }, (_, i) => i)
+const SCORES_NORMAL = Array.from({ length: 12 }, (_, i) => i)
+const SCORES_DEUCE = Array.from({ length: 31 }, (_, i) => i)
+
+function getScoreRange(otherScore) {
+  // 상대가 10 이상이면 듀스 가능 - 전체 범위
+  if (otherScore >= 10) return SCORES_DEUCE
+  return SCORES_NORMAL
+}
 const SETS_3 = ['1세트', '2세트', '3세트']
 const SETS_5 = ['1세트', '2세트', '3세트', '4세트', '5세트']
 
@@ -177,7 +184,7 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="score-section">
         <div className="score-main-row">
-          <ScrollPicker items={SCORES} value={leftScore} onChange={setLeftScore} />
+          <ScrollPicker items={getScoreRange(rightScore)} value={leftScore} onChange={setLeftScore} />
           <div className="center-col">
             <div className="set-score-block">
               <div className="set-score-num">{leftSetWins}</div>
@@ -188,7 +195,7 @@ export default function MainScreen({ onHistory, onSettings }) {
               <div className="set-score-lbl">세트</div>
             </div>
           </div>
-          <ScrollPicker items={SCORES} value={rightScore} onChange={setRightScore} />
+          <ScrollPicker items={getScoreRange(leftScore)} value={rightScore} onChange={setRightScore} />
         </div>
       </div>
 
