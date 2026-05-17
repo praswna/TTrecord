@@ -184,6 +184,25 @@ export default function MainScreen({ onHistory, onSettings }) {
 
       <div className="divider" />
 
+      <div className="score-section">
+        <div className="score-main-row">
+          <ScrollPicker items={SCORES} value={leftScore} onChange={setLeftScore} />
+          <div className="center-col">
+            <div className="set-score-block">
+              <div className="set-score-num">{leftSetWins}</div>
+              <div className="set-score-lbl">세트</div>
+            </div>
+            <div className="set-score-block">
+              <div className="set-score-num">{rightSetWins}</div>
+              <div className="set-score-lbl">세트</div>
+            </div>
+          </div>
+          <ScrollPicker items={SCORES} value={rightScore} onChange={setRightScore} />
+        </div>
+      </div>
+
+      <div className="divider" />
+
       <div className="set-picker-row">
         <div className="set-side-results">
           {SETS.map(s => {
@@ -218,23 +237,7 @@ export default function MainScreen({ onHistory, onSettings }) {
         </div>
       </div>
 
-      <div className="divider" />
-
-      <div className="score-section">
-        <div className="score-main-row">
-          <ScrollPicker items={SCORES} value={leftScore} onChange={setLeftScore} />
-          <div className="center-col">
-            <div className="set-score-block">
-              <div className="set-score-num">{leftSetWins}</div>
-              <div className="set-score-lbl">세트</div>
-            </div>
-            <div className="set-score-block">
-              <div className="set-score-num">{rightSetWins}</div>
-              <div className="set-score-lbl">세트</div>
-            </div>
-          </div>
-          <ScrollPicker items={SCORES} value={rightScore} onChange={setRightScore} />
-        </div>
+      <div className="set-save-row">
         <button className={`set-save-btn ${valid ? 'active' : ''}`} onClick={handleSaveSet} disabled={!valid}>
           {valid ? `세트 저장 (${leftScore} : ${rightScore})` : '세트 저장 : ' + getInvalidReason(leftScore, rightScore)}
         </button>
