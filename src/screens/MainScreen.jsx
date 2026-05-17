@@ -3,6 +3,7 @@ import ScrollPicker from '../components/ScrollPicker'
 import NameInput from '../components/NameInput'
 import { saveRecord, saveName, getStats } from '../utils/storage'
 import PlaceModal from '../components/PlaceModal'
+import DateModal from '../components/DateModal'
 import { getCurrentPosition, detectPlace } from '../utils/gps'
 import { syncToSheet } from '../utils/sheets'
 import './MainScreen.css'
@@ -50,7 +51,8 @@ export default function MainScreen({ onHistory, onSettings }) {
   const [leftScore, setLeftScore] = useState(0)
   const [rightScore, setRightScore] = useState(0)
   const [setResults, setSetResults] = useState({})
-  const [gameDate] = useState(new Date())
+  const [gameDate, setGameDate] = useState(new Date())
+  const [showDateModal, setShowDateModal] = useState(false)
   const [place, setPlace] = useState('장소 미설정')
   const [showPlaceModal, setShowPlaceModal] = useState(false)
   
@@ -142,7 +144,7 @@ export default function MainScreen({ onHistory, onSettings }) {
       </div>
 
       <div className="meta-row">
-        <button className="meta-pill">⏱ {formatDate(gameDate)} ✏</button>
+        <button className="meta-pill" onClick={() => setShowDateModal(true)}>⏱ {formatDate(gameDate)} ✏</button>
         <button className="meta-pill" onClick={() => setShowPlaceModal(true)}>📍 {place} ✏</button>
       </div>
 
@@ -232,6 +234,10 @@ export default function MainScreen({ onHistory, onSettings }) {
           {saved ? '저장 완료! ✓' : '경기 저장'}
         </button>
       </div>
+      {showDateModal && (
+        <DateModal date={gameDate} onSelect={setGameDate} onClose={() => setShowDateModal(false)} />
+      )}
+
       {showPlaceModal && (
         <PlaceModal current={place} onSelect={setPlace} onClose={() => setShowPlaceModal(false)} />
       )}
